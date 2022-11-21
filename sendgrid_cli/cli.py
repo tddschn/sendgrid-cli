@@ -16,7 +16,7 @@ def get_args():
     parser = argparse.ArgumentParser(
         description='sendgrid CLI',
         formatter_class=argparse.ArgumentDefaultsHelpFormatter,
-        epilog='Email body (HTML) is read from stdin, supply your API key with SENDGRID_API_KEY environment variable',
+        epilog='Email body is read from stdin, supply your API key with SENDGRID_API_KEY environment variable',
     )
 
     parser.add_argument(
@@ -50,6 +50,10 @@ def get_args():
         type=str,
     )
 
+    parser.add_argument(
+        '-H', '--html', help='send as html instead of plain text', action='store_true'
+    )
+
     return parser.parse_args()
 
 
@@ -57,7 +61,7 @@ def main():
     """Make a jazz noise here"""
 
     args = get_args()
-    html_content = sys.stdin.read()
+    stdin_content = sys.stdin.read()
     import os
 
     sendgrid_api_key = os.getenv('SENDGRID_API_KEY')
@@ -67,11 +71,15 @@ def main():
     from sendgrid import SendGridAPIClient
     from sendgrid.helpers.mail import Mail
 
+    content_kwarg = {
+        'html_content' if args.html else 'plain_text_content': stdin_content
+    }
+
     message = Mail(
         from_email=(args.from_email, args.from_name),
         to_emails=args.to_emails,
         subject=args.subject,
-        html_content=html_content,
+        **content_kwarg,
     )
 
     sg = SendGridAPIClient(sendgrid_api_key)
