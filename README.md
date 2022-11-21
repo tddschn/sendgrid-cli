@@ -53,6 +53,7 @@ options:
                         From name NAME (default: None)
   -s str, --subject str
                         Subject (default: None)
+  -H, --html            send as html instead of plain text (default: False)
 
 Email body (HTML) is read from stdin, supply your API key with SENDGRID_API_KEY environment variable
 
