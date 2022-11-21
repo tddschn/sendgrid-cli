@@ -1,0 +1,31 @@
+[tool.poetry]
+name = "sendgrid-cli"
+version = "0.1.0"
+description = ""
+authors = ["Teddy Xinyuan Chen <45612704+tddschn@users.noreply.github.com>"]
+readme = "README.md"
+packages = [{ include = "sendgrid_cli" }]
+license = "MIT"
+homepage = "https://github.com/tddschn/sendgrid-cli"
+repository = "https://github.com/tddschn/sendgrid-cli"
+classifiers = ["Topic :: Utilities"]
+keywords = ["email", "sendgrid", "CLI", "utility"]
+
+[tool.poetry.scripts]
+sendgrid = "sendgrid_cli.cli:main"
+
+[tool.poetry.urls]
+"Bug Tracker" = "https://github.com/tddschn/sendgrid-cli/issues"
+
+[tool.poetry.dependencies]
+python = "^3.10"
+sendgrid = "^6.9.7"
+
+
+[tool.poetry.group.dev.dependencies]
+black = "^22.10.0"
+better-exceptions = "^0.3.3"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
