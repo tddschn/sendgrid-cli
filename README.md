@@ -77,7 +77,7 @@ Below is a working job configuration
         env:
           SENDGRID_API_KEY: ${{ secrets.SENDGRID_API_KEY }}
         run: |
-          cat email-body.html | sendgrid -f 'from@example.com' -n 'from-name' -t 'to@example.com' -s 'sendgrid-cli test'
+          cat email-body.html | sendgrid -f 'from@example.com' -n 'from-name' -t 'to@example.com' -s 'sendgrid-cli test' --html
 ```
 
 ## Develop
